@@ -1,14 +1,14 @@
-function isValidDate(string) {
-    const splittedString = string.split("/");
-    const day = splittedString[0];
-    const month = splittedString[1];
-    const year = splittedString[2];
-
-
-    if (string.length !== 10) {
+function isValidDate(date) {
+    if (date.length !== 10) {
         return false
     }
-    else if (day > maxDayInAMonth(month)) {
+
+    const splittedDate = date.split("/");
+    const day = splittedDate[0];
+    const month = splittedDate[1];
+    const year = splittedDate[2];
+
+    if (day > maxDayInAMonth(month)) {
         return false;
     }
     else if (month > 12) {
@@ -42,4 +42,22 @@ function maxDayInAMonth(month) {
     }
 }
 
-console.log(isValidDate("31/04/1998"));
+function isPalindrome(date) {
+    if (!isValidDate(date)) {
+        return false;
+    }
+    
+    const splittedDate = date.split("/");
+    const dayMonth = splittedDate[0]+splittedDate[1];
+    const year = splittedDate[2];
+    const monthDay = dayMonth.split("").reverse().join("");
+
+    if (monthDay === year) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+console.log(isPalindrome("20/12/2102"));
